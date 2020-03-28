@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace-->
+<mapper namespace="com.zhuang.dao.TestStudentMapper">
+    <resultMap id="BaseResultMap" type="com.hzz.cecdata.study.entity.Student">
+        <id column="student_id" property="studentId" jdbcType="BIGINT"/>
+        <result column="student_name" property="studentName" jdbcType="VARCHAR"/>
+        <result column="student_sex" property="studentSex" jdbcType="VARCHAR"/>
+        <result column="student_age" property="studentAge" jdbcType="BIGINT"/>
+        <result column="student_code" property="studentCode" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!-- 增加一个学生-->
+    <insert id="addTestStudent" parameterType="com.zhuang.pojo.TestStudent">
+        INSERT INTO demo_project.test_student(student_name,student_sex,student_code,student_code)
+        VALUES (#{studentName},#{studentSex},#{studentAge},#{studentCode});
+    </insert>
+    <!--删除一个学生-->
+    <delete id="deleteTestStudentById" parameterType="Long">
+        DELETE FROM demo_project.test_student WHERE student_id =#{studentId};
+    </delete>
+
+    <!--更新一个学生-->
+    <update id="updateTestStudent" parameterType="com.zhuang.pojo.TestStudent">
+        UPDATE demo_project.test_student SET
+          student_name=#{},student_sex=#{},student_age=#{},student_code=#{}
+        WHERE student_id =#{studentId}
+    </update>
+
+    <!--查询一个学生-->
+    <select id="selectTestStudentById" resultMap="BaseResultMap">
+        SELECT  * FROM  demo_project.test_student WHERE student_id =#{studentId};
+    </select>
+
+    <!--查询所有的学生-->
+    <select id="selectAllTestStudent" resultMap="BaseResultMap">
+        SELECT  * FROM  demo_project.test_student;
+    </select>
+</mapper>
